@@ -12,7 +12,7 @@ const ForgotPasswordScreen = () => {
     const dispatch = useDispatch();
 
     const forgotPasswordData = useSelector((state) => state._forgotPassword);
-    const { data, error, success, loading } = forgotPasswordData;
+    const { error, success, loading } = forgotPasswordData;
 
     const submitHandler = (e) => {
         e.preventDefault();

@@ -14,7 +14,7 @@ const Gameweeks = () => {
 
     const gameweeks = [];
     data && data.map((d) => {
-        gameweeks.push({ value: d, label: `Gameweek ${d}`});
+       return gameweeks.push({ value: d, label: `Gameweek ${d}`});
     });
     const gameweekHandler = (gameweek) => {
        setGameweek(gameweek);

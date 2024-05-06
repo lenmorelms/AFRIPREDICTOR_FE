@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { logout } from "../Redux/Actions";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "./resusables/Logo";
-import { webUrl } from "./resusables/Functions";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -15,7 +14,10 @@ const Header = () => {
 
     useEffect(() => {
         const path = location.pathname.substring(0, 5);
-        if(!userInfo && path !== "/regi" && path !== "/forg" && path !== "/rese") {
+        if(!userInfo && path !== "/regi" && path !== "/forg" && path !== "/rese"
+            && path !== "/" && path !== "/lear" && path !== "/how-" && path !== "/priv"
+            && path !== "/term" && path !== "/help" && path !== "/cont"
+        ) {
             navigate("/login");
         }
     }, [userInfo, navigate, location.pathname]);
@@ -28,7 +30,7 @@ const Header = () => {
         <div className="m-4">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <Link to={webUrl} className="navbar-brand">
+                <Link to="/" className="navbar-brand">
                     <Logo fontWeight="400"/>
                 </Link>
                 <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

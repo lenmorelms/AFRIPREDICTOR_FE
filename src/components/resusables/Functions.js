@@ -1,11 +1,5 @@
-export const serverUrl = () => {
-    // return `http://localhost:5000`;
-    return  `https://afripredictor.onrender.com`;
-};
-export const webUrl = () => {
-    // return `http://localhost:3000`;
-    return  `https://afripredictor-fe.vercel.app`;
-};
+export const serverUrl = "https://afripredictor.onrender.com";
+export const webUrl = "https://afripredictor.com";
 export const formatDate = (inputDate) => {
     // Convert inputDate string to a Date object
     var dateObj = new Date(inputDate);

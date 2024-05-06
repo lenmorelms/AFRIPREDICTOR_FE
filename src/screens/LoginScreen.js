@@ -45,7 +45,7 @@ const LoginScreen = () => {
         <>
         <Header />
         <div className="" style={{ textAlign: "center" }}>
-          {error && <Message variant="alert-danger">Wrong Username/Password, Try Again.</Message>}
+          {error && <Message variant="alert-danger">{error} Wrong Username/Password, Try Again.</Message>}
           {loading && <Loading />}
             <div className="color-red heading">LOG IN <i class="fa fa-sign-in" aria-hidden="true"></i></div>
             <br />
