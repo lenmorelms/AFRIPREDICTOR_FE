@@ -8,7 +8,7 @@ const Tournament = ({ logoUrl, heading, text, url, buttonText }) => {
     <div className="">
       <div className="row">
         {/* Header */}
-        <div className="col-12">
+        <div className="col-12 col-sm-10">
             <Image
                 src={logoUrl}
                 alt="Team Logo"

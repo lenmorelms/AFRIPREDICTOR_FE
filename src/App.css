@@ -104,7 +104,7 @@ input[type="number"] {
 }
 
 /* Style for the buttons */
-.my-column button {
+.my-column button, .start-playing button {
   background-color: red; /* White button background */
   color: #fefefe; /* Red button text color */
   border: none;
@@ -113,8 +113,9 @@ input[type="number"] {
   font-weight: bold;
   cursor: pointer;
 }
-.my-column button:hover {
+.my-column button:hover, .start-playing button:hover {
   padding: 12px 23px;
+  transition: 0.3s;
 }
 .league-heander-nav-link:hover {
   color: #000;
@@ -128,8 +129,9 @@ input[type="number"] {
 }
 .predict-box {
   text-align: center;
-  /* width: 80%; */
+  /* width: 50%; */
   border: 1px solid navy;
+  border-radius: 5px;
 }
 button.predict-box {
   background-color: navy;
@@ -257,7 +259,16 @@ button.predict-box:hover {
   .flex-container {
       flex-direction: column;
   }
+  .predictor-logo {
+    border-radius: 50%;
+      max-width: 70px; /* Adjust the width as needed */
+      height: auto; /* Adjust the height as needed */
+  }
+  .lock-btn {
+    display: none;
+  }
 }
+
 .color-red {
   color: red;
 }
@@ -294,16 +305,26 @@ button.predict-box:hover {
   flex: 10%;
   max-width: 10%;
 }
+.my-component {
+  margin: 0 10%;
+}
 @media (max-width: 768px) {
   .flex-container-wrap {
     flex-direction: row;
   }
   .flex-container-wrap > .flex-tournament {
-  	min-width: 100%!important;
+  	min-width: 95%!important;
   }
   .flex-container-wrap > .flex-team {
     flex: 30%;
     max-width: 30%!important;
+    text-align: center;
+  }
+  .select-team-section {
+    margin-left: 3%!important;
+  }
+  .my-component {
+    margin: 0 2%;
   }
 }
 .rounded-border {

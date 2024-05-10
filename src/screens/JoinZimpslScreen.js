@@ -33,7 +33,7 @@ const JoinZimpslScreen = () => {
         {error && <Message variant="alert-danger">Failed to Join Tournament, Try Again.</Message>}
         {loading && <Loading />}
         <div className="homepage-hero">
-            <div style={{border: "3px solid transparent", margin: "auto"}} className="container rounded-border">
+            <div style={{border: "3px solid transparent", margin: "auto"}} className="container rounded-border select-team-section">
                 <div className="row col-12" style={{backgroundColor: "navy", padding: "2px", border: "2px solid navy", borderRadius: "5px"}}>
                     <h2>Zimbabwe Premier League Predictor</h2>
                 </div>

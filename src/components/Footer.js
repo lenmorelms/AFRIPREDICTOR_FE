@@ -8,35 +8,35 @@ const Footer = () => {
 <div className="">
   <footer className="text-center text-white" style={{backgroundColor: "navy"}}>
     <div className="container">
-      <section className="mt-5">
+      <section className="mt-0">
         <div className="row text-center d-flex justify-content-center pt-5">
-          <div className="col-md-2">
+        <div className="col-md-2 p-1">
             <h6 className="text-uppercase font-weight-bold">
-              <Link to="/how-it-works" className="nav-item nav-item nav-link text-white">How IT Works</Link>
+              <Link to="/contact" className="nav-item nav-item nav-link text-white">Contact</Link>
             </h6>
           </div>
 
-          <div className="col-md-2">
-            <h6 className="text-uppercase font-weight-bold">
-              <Link to="/privacy-policy" className="nav-item nav-item nav-link text-white">Privacy Policy</Link>
-            </h6>
-          </div>
-
-          <div className="col-md-2">
-            <h6 className="text-uppercase font-weight-bold">
-              <Link to="/terms-of-use" className="nav-item nav-item nav-link text-white">Terms of Use</Link>
-            </h6>
-          </div>
-
-          <div className="col-md-2">
+          <div className="col-md-2 p-1">
             <h6 className="text-uppercase font-weight-bold">
               <Link to="/help" className="nav-item nav-item nav-link text-white">Help Center</Link>
             </h6>
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-2 p-1">
             <h6 className="text-uppercase font-weight-bold">
-              <Link to="/contact" className="nav-item nav-item nav-link text-white">Contact</Link>
+              <Link to="/terms-of-use" className="nav-item nav-item nav-link text-white">Terms of Use</Link>
+            </h6>
+          </div>
+
+          <div className="col-md-2 p-1">
+            <h6 className="text-uppercase font-weight-bold">
+              <Link to="/how-it-works" className="nav-item nav-item nav-link text-white">How IT Works</Link>
+            </h6>
+          </div>
+
+          <div className="col-md-2 p-1">
+            <h6 className="text-uppercase font-weight-bold">
+              <Link to="/privacy-policy" className="nav-item nav-item nav-link text-white">Privacy Policy</Link>
             </h6>
           </div>
         </div>

@@ -12,7 +12,7 @@ const HowITWorksScreen = () => {
       <h1>HOW IT WORKS</h1>
     </div>
     <div className='terms-of-use'>
-        <div className='container col-8 pt-5'>
+        <div className='container col-lg-8 p-3 pt-5'>
         <h3 className='red' style={{textAlign: "center", paddingBottom: "5px"}}>
             How Afripredictor Works
         </h3>

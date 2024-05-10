@@ -18,7 +18,7 @@ const ZimpslScreen = () => {
     </div>
   </div>
 </div> 
-        <div className="my-component" style={{ margin: "0% 10%" }}>
+        <div className="my-component">
         {/* Header */}
         <ZimpslHeader />
         {/* Body */}

@@ -10,10 +10,10 @@ export const formatDate = (inputDate) => {
     // Extract day, month, and year from the Date object
     var day = dateObj.getDate();
     var month = months[dateObj.getMonth()];
-    var year = dateObj.getFullYear();
+    // var year = dateObj.getFullYear();
 
     // Format the date as "day Month year"
-    var formattedDate = day + ' ' + month + ' ' + year;
+    var formattedDate = day + ' ' + month;
 
     return formattedDate;
 };
@@ -52,4 +52,32 @@ export const getCurrentDateTime = () => {
 // const dateTime = getCurrentDateTime();
 // console.log("Date:", dateTime.date);
 // console.log("Time:", dateTime.time);
+
+export const isDeviceLaptop = () => {
+    // Get the screen width and height
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    // Define the threshold screen size (e.g., 10 inches)
+    const thresholdScreenSize = 12.8; // inches
+    // Calculate the diagonal screen size using Pythagoras' theorem
+    const diagonalInches = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2)) / 96; // Assuming standard DPI of 96
+    // Check if the device has a touchscreen
+    const hasTouchScreen = "maxTouchPoints" in navigator && navigator.maxTouchPoints > 0;
+    
+    // Check if the device has a keyboard
+    const hasKeyboard = "keyboard" in navigator && typeof navigator.keyboard !== 'undefined';
+
+    // If the device has both a touchscreen and a keyboard, assume it's a laptop
+    if (hasTouchScreen && hasKeyboard) {
+        return true;
+    } else if (hasTouchScreen && diagonalInches < thresholdScreenSize) {
+        // If it has a touchscreen but no keyboard, assume it's a phone
+        return false;
+    } else {
+        // If it doesn't have a touchscreen, assume it's a laptop
+        return true;
+    }
+
+}
+
 

@@ -12,7 +12,7 @@ const PrivacyScreen = () => {
       <h1>PRIVACY POLICY</h1>
     </div>
     <div className='terms-of-use'>
-        <div className='container col-8 pt-5'>
+        <div className='container col-lg-8 p-3 pt-5'>
         <p>
             At Afripredictor, we prioritize the privacy and security of our users' personal information. 
             Our Privacy Policy outlines how we collect, use, and protect the data you provide when using our platform. 

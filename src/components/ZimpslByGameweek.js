@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchZimpslByGameweek, zimpslPredict } from "../Redux/Actions";
 import Button from "../components/resusables/Button"
 import Image from "./resusables/Image";
 import Gameweeks from "./Gameweeks";
-import { formatDate, getCurrentDateTime } from "./resusables/Functions";
+import { formatDate, getCurrentDateTime, isDeviceLaptop } from "./resusables/Functions";
 import Loading from "./LoadingError/Loading";
 import Message from "./LoadingError/Error";
 import { serverUrl } from "./resusables/Functions";
 
 const ZimpslByGameweek = (props) => {
   const { gameweek } = props;
+  const [isLaptop] = useState(isDeviceLaptop());
   const dispatch = useDispatch();
 
   const docValue = (id) => {
@@ -41,42 +42,84 @@ const ZimpslByGameweek = (props) => {
     {loading ? (
             <Loading />
         ) : error ? (
-            <Message variant="alert-danger">Failed to Get Fixtures, Reload Page.</Message>
+            <Message variant="alert-danger"></Message>
         ) : (
-      <div className="col-8">
-        <table className="fixture-board" style={{ color: "#000", width: "100%" }}>
-          {data.map((d) => (
-          <tr>
-            <td><input id={`fixtureId_${d.fixtureCount}`} value={d._id} hidden /></td>
-            <td><input id={`gameweek_${d.fixtureCount}`} value={d.gameweek} hidden /></td>
-            <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team1}.jpg`}/><br />{d.team1}</td>
-            <td>
-              {d.playerPredicted ? 
-                <input className="form-control predict-box" type="number" value={d.playerResult.score1} min="0" max="19" disabled={true} />
-                :
-                <input className="form-control predict-box" type="number" id={`playerScore1_${d.fixtureCount}`} min="0" max="19" disabled={d.result && true} />
-              }
-            </td>
-            <td><button className="btn predict-box">{d.score1}</button></td>
-            <td><p> {formatDate(d.date)} <br /> {d.kickoff} </p></td>
-            <td><button className="btn predict-box">{d.score1}</button></td>
-            <td>
-              {d.playerPredicted ? 
-                <input className="form-control predict-box" type="number" value={d.playerResult.score2} min="0" max="19" disabled={true} />
-                :
-                <input className="form-control predict-box" type="number" id={`playerScore2_${d.fixtureCount}`} min="0" max="19" disabled={d.result && true} />
-              }
-            </td>
-            <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team2}.jpg`}/><br />{d.team2}</td>
-            <td> <Button className="btn btn-primary" type="submit" children="Lock" disabled={(d.playerPredicted && true) || (d.result && true) || (d.date <= getCurrentDateTime().date)} 
+          <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
+          <table className="fixture-board table mt-1" style={{ color: "#000", width: "100%" }}>
+            {data.map((d) => (
+              <>
+              <tr className="" style={{ backgroundColor: "#ebe9e4", borderRadius: "5px" }}>
+                <td colSpan={isLaptop ? 3 : 5 } className="p-2">
+                  <i className="fa fa-calendar" aria-hidden="true" style={{ backgroundColor: "#ebe9e4", fontSize: "30px" }}></i>
+                  {formatDate(d.date)}  {d.kickoff}
+                </td>
+                <td colSpan={isLaptop ? 4 : 0}></td>
+                  {isLaptop ? (<td></td>) : (
+                    d.result ? (
+                      <td></td>
+                    ) : (
+                      <td style={{ display: (d.result) ? "none" : "block" }}>   
+                        <Button className="btn btn-primary" type="submit" children="Lock" disabled={(d.playerPredicted && true) || (d.result && true) || (d.date <= getCurrentDateTime().date)}
+                          onClick={() => handlePrediction(userInfo._id, docValue(`fixtureId_${d.fixtureCount}`), docValue(`gameweek_${d.fixtureCount}`), docValue(`playerScore1_${d.fixtureCount}`), docValue(`playerScore2_${d.fixtureCount}`))} 
+                        />
+                      </td> 
+                    )
+                  )}
+              </tr>
+            <tr>
+              <td><input id={`fixtureId_${d.fixtureCount}`} value={d._id} hidden /></td>
+              <td><input id={`gameweek_${d.fixtureCount}`} value={d.gameweek} hidden /></td>
+              <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team1}.jpg`}/><br />{d.team1}</td>
+              
+              <td>
+              {d.result ?
+                  (<input className="predict-box" type="number" value={d.score1} min="0" max="19" disabled={true} />)
+                  :
+                  (d.playerPredicted ?
+                    <input className="predict-box" type="number" value={d.playerResult.score1} min="0" max="19" disabled={true} />
+                    :
+                    <input className="predict-box" type="number" id={`playerScore1_${d.fixtureCount}`} min="0" max="19" />
+                  )
+                }
+              </td>
+              <td>
+              {d.result ? (
+                d.playerPredicted ? (
+                  <>
+                  <b>Your Result 👇</b><br />
+                  <b>{d.playerResult.score1} - {d.playerResult.score2}</b>
+                  </>
+                ) : (
+                    <p>No Prediction</p>
+                  )
+                ) : (
+                    <p>-</p>
+                )}
+              </td>            
+              <td>
+              {d.result ?
+                  (<input className="predict-box" type="number" value={d.score2} min="0" max="19" disabled={true} />)
+                  :
+                  (d.playerPredicted ?
+                    <input className="predict-box" type="number" value={d.playerResult.score2} min="0" max="19" disabled={true} />
+                    :
+                    <input className="predict-box" type="number" id={`playerScore2_${d.fixtureCount}`} min="0" max="19" />
+                  )
+                }
+              </td>            
+              <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team2}.jpg`}/><br />{d.team2}</td>
+              <td className="lock-btn" style={{ display: (!isLaptop || d.result) ? "none" : "block" }}>
+                <Button className="btn btn-primary" type="submit" children="Lock" disabled={(d.playerPredicted && true) || (d.result && true) || (d.date <= getCurrentDateTime().date)}
                     onClick={() => handlePrediction(userInfo._id, docValue(`fixtureId_${d.fixtureCount}`), docValue(`gameweek_${d.fixtureCount}`), docValue(`playerScore1_${d.fixtureCount}`), docValue(`playerScore2_${d.fixtureCount}`))} 
-                  />
-            </td>
-          </tr>
-          ))}
-        </table>
-      </div>)}
-    <div className="col-4" style={{color: "#000"}}>
+                 />
+              </td>
+            </tr>
+            </>
+            ))}
+          </table>
+        </div>
+          )}
+    <div className={`${isLaptop ? `col-4` : `col-12`}`} style={{color: "#000"}}>
       Table
     </div>
     </div>

@@ -16,7 +16,7 @@ const HowToPlay = () => {
                 team of your choice.
             </p>
             <Link to="/learn">
-              <button variant="light" className="Button rounded-pill">Lear More <i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+              <button variant="light" className="Button rounded-pill">Lear More <i className="fa fa-exclamation-circle" aria-hidden="true"></i></button>
             </Link>
           </div>
         </div>
@@ -30,7 +30,7 @@ const HowToPlay = () => {
                 Make your predictions and lock them before the games begin. Never miss a gameweek
             </p>
             <Link to="/learn">
-              <button variant="light" className="Button rounded-pill">Lear More <i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+              <button variant="light" className="Button rounded-pill">Lear More <i className="fa fa-exclamation-circle" aria-hidden="true"></i></button>
             </Link>
           </div>
         </div>
@@ -45,11 +45,16 @@ const HowToPlay = () => {
                 make strides on the leaderboard
             </p>
             <Link to="/learn">
-              <button variant="light" className="Button rounded-pill">Learn More <i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+              <button variant="light" className="Button rounded-pill">Learn More <i className="fa fa-exclamation-circle" aria-hidden="true"></i></button>
             </Link>
           </div>
         </div>
       </div>
+        <div className="start-playing p-3" style={{ textAlign: "center" }}>
+            <Link to="/login">
+              <button variant="light" className="Button rounded-pill">Start Playing <i className="fa fa-arrow-right" aria-hidden="true"></i></button>
+            </Link>
+        </div>
     </div>
         </>
     );

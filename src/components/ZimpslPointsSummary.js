@@ -35,7 +35,7 @@ const ZimpslPointsSummary = () => {
           <b>Exact</b>
           <p>{d.score}</p>
         </div>
-        <div className="col">
+        <div className="col-2">
           <b>Points</b>
           <p>{d.total_points}</p>
         </div>
