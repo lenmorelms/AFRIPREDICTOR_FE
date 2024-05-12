@@ -6,8 +6,9 @@ import Image from "./resusables/Image";
 import Gameweeks from "./Gameweeks";
 import { formatDate, getCurrentDateTime, isDeviceLaptop } from "./resusables/Functions";
 import Loading from "./LoadingError/Loading";
-import Message from "./LoadingError/Error";
+// import Message from "./LoadingError/Error";
 import { serverUrl } from "./resusables/Functions";
+import ZimplsTable from "./resusables/ZimplsTable";
 
 const Zimpsl = () => {
   const [isLaptop] = useState(isDeviceLaptop());
@@ -43,11 +44,15 @@ const Zimpsl = () => {
     {loading ? (
             <Loading />
         ) : error ? (
-            <Message variant="alert-danger"></Message>
+            // <Message variant="alert-danger"></Message>
+            ""
         ) : (
-      <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
-        <table className="fixture-board table mt-1" style={{ color: "#000", width: "100%" }}>
-          {data.map((d) => (
+      <div className={`table-responsive ${isLaptop ? `col-7` : `col-12`}`}>
+        {data.length === 0 ? (
+          <h1>NO FIXTURES YET</h1>
+        ) : (
+          <table className="fixture-board table mt-1" style={{ color: "#000", width: "100%" }}>
+          {data.length > 0 && data.map((d) => (
             <>
             <tr className="" style={{ backgroundColor: "#ebe9e4", borderRadius: "5px" }}>
               <td colSpan={isLaptop ? 3 : 5 } className="p-2">
@@ -118,10 +123,37 @@ const Zimpsl = () => {
           </>
           ))}
         </table>
+        )}
+        
       </div>
         )}
-    <div className={`${isLaptop ? `col-4` : `col-12`}`} style={{color: "#000"}}>
-      Table
+    <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}>
+    <table className="table">
+      <thead>
+        <tr className="p-2" style={{ backgroundColor: "navy", color: "white" }}>
+          <th>PO</th>
+          <th>TEAM</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GOALS</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {ZimplsTable.map((team) => (
+          <tr>
+          <td>{team.rank}</td>
+          <td>{team.name}</td>
+          <td>{team.wins}</td>
+          <td>{team.draws}</td>
+          <td>{team.losses}</td>
+          <td>{team.goals_for} : {team.goals_against}</td>
+          <td>{team.points}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
     </div>
     </div>
     </div>

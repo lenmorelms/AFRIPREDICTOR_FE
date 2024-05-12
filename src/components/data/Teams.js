@@ -1,7 +1,7 @@
 import { serverUrl } from "../resusables/Functions";
 const imageServer = `${serverUrl}/images/zimpsl`;
 const Teams = [
-    { name: "Herentals FC", image: `${imageServer}/Herentals FC.jpg` },
+    { name: "Herentals FC", image: `${imageServer}/HERENTALS FC.jpg` },
     { name: "Bikita Minerals FC", image: `${imageServer}/Bikita Minerals FC.jpg` },
     { name: "Caps United", image: `${imageServer}/Caps United.jpg` },
     { name: "Chicken Inn FC", image: `${imageServer}/Chicken Inn FC.jpg` },

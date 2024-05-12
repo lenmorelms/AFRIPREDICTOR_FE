@@ -24,7 +24,7 @@ const ForgotPasswordScreen = () => {
         <Header />
         <div className="" style={{ textAlign: "center" }}>
         {error && <Message variant="alert-danger">Failed to Recover Account, Try Again.</Message>}
-        {success && <div>Reset password link sent to your email</div>}
+        {success && <div style={{ color: "red" }}>Reset password link sent to your email</div>}
         {loading && <Loading />}
         <div className="forgot-password">
             <h3>Forgot your password</h3>
