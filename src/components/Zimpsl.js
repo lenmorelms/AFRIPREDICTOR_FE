@@ -40,13 +40,14 @@ const Zimpsl = () => {
     } else {
       dispatch(zimpslPredict(userId, fixtureId, parseInt(gameweek), parseInt(score1), parseInt(score2)));
       // alert("Prediction Updated");
+      toast.success("Prediction Updated", ToastObjects);
     }
   };
   const diagonalInches = Math.sqrt(Math.pow(window.screen.width, 2) + Math.pow(window.screen.height, 2)) / 96;
 
   useEffect(() => {
     dispatch(fetchZimpsl(userInfo._id));
-    if(predictData) toast.success("Prediction Updated", ToastObjects);
+    // if(predictData) toast.success("Prediction Updated", ToastObjects);
     if(predictError) toast.error("Failed, try again", ToastObjects);
   }, [dispatch, userInfo._id, predictData, predictError]);
   return (
