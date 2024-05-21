@@ -58,7 +58,7 @@ export const isDeviceLaptop = () => {
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
     // Define the threshold screen size (e.g., 10 inches)
-    const thresholdScreenSize = 12.8; // inches
+    const thresholdScreenSize = 12.5; // inches
     // Calculate the diagonal screen size using Pythagoras' theorem
     const diagonalInches = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2)) / 96; // Assuming standard DPI of 96
     // Check if the device has a touchscreen
@@ -67,16 +67,19 @@ export const isDeviceLaptop = () => {
     // Check if the device has a keyboard
     const hasKeyboard = "keyboard" in navigator && typeof navigator.keyboard !== 'undefined';
 
-    // If the device has both a touchscreen and a keyboard, assume it's a laptop
-    if (hasTouchScreen && hasKeyboard) {
-        return true;
-    } else if (hasTouchScreen && diagonalInches < thresholdScreenSize) {
-        // If it has a touchscreen but no keyboard, assume it's a phone
+    // If it has a touchscreen but no keyboard, assume it's a phone
+    if (diagonalInches < thresholdScreenSize) {
         return false;
+    } else if (hasTouchScreen && diagonalInches < thresholdScreenSize) {
+        return false;
+    } else if (hasTouchScreen && hasKeyboard) {
+        // If the device has both a touchscreen and a keyboard, assume it's a laptop
+        return true;
     } else {
         // If it doesn't have a touchscreen, assume it's a laptop
         return true;
     }
+    // return false;
 
 }
 

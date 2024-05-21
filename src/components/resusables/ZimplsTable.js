@@ -1,4 +1,4 @@
-const ZimplsTable = [
+const TeamPoints = [
       {
         "rank": 1,
         "name": "Simba Bhora",
@@ -181,5 +181,35 @@ const ZimplsTable = [
       }
 ]
 
+const ZimplsTable = () => {
+  return (
+    <table className="table">
+      <thead>
+        <tr className="p-2" style={{ backgroundColor: "navy", color: "white" }}>
+          <th>PO</th>
+          <th>TEAM</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GOALS</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {TeamPoints.map((team) => (
+          <tr>
+          <td>{team.rank}</td>
+          <td>{team.name}</td>
+          <td>{team.wins}</td>
+          <td>{team.draws}</td>
+          <td>{team.losses}</td>
+          <td>{team.goals_for} : {team.goals_against}</td>
+          <td>{team.points}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
 export default ZimplsTable;
   

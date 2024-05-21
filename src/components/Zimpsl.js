@@ -48,7 +48,7 @@ const Zimpsl = () => {
             ""
         ) : (
       // <div className={`table-responsive ${isLaptop ? `col-7` : `col-12`}`}>
-      <div className="table-responsive col-lg-7">
+      <div className="table-responsive col-lg-7 col-sm-10">
         {data.length === 0 ? (
           <h1>NO FIXTURES YET</h1>
         ) : (
@@ -114,7 +114,7 @@ const Zimpsl = () => {
                 )
               }
             </td>            
-            <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team2}.jpg`}/><br />{d.team2}</td>
+            <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team2}.jpg`} /><br />{d.team2}</td>
             <td className="lock-btn" style={{ display: (!isLaptop || d.result) ? "none" : "block" }}>
               <Button className="btn btn-primary" type="submit" children="Lock" disabled={(d.playerPredicted && true) || (d.result && true) || (d.date <= getCurrentDateTime().date)}
                   onClick={() => handlePrediction(userInfo._id, docValue(`fixtureId_${d.fixtureCount}`), docValue(`gameweek_${d.fixtureCount}`), docValue(`playerScore1_${d.fixtureCount}`), docValue(`playerScore2_${d.fixtureCount}`))} 
@@ -129,33 +129,8 @@ const Zimpsl = () => {
       </div>
         )}
     {/* <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}> */}
-      <div className="table-responsive col-lg-5" style={{color: "#000"}}>
-    <table className="table">
-      <thead>
-        <tr className="p-2" style={{ backgroundColor: "navy", color: "white" }}>
-          <th>PO</th>
-          <th>TEAM</th>
-          <th>W</th>
-          <th>D</th>
-          <th>L</th>
-          <th>GOALS</th>
-          <th>PTS</th>
-        </tr>
-      </thead>
-      <tbody>
-        {ZimplsTable.map((team) => (
-          <tr>
-          <td>{team.rank}</td>
-          <td>{team.name}</td>
-          <td>{team.wins}</td>
-          <td>{team.draws}</td>
-          <td>{team.losses}</td>
-          <td>{team.goals_for} : {team.goals_against}</td>
-          <td>{team.points}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+      <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}>
+        <ZimplsTable />   
     </div>
     </div>
     </div>

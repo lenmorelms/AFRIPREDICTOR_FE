@@ -6,8 +6,8 @@ import Image from "./resusables/Image";
 import Gameweeks from "./Gameweeks";
 import { formatDate, getCurrentDateTime, isDeviceLaptop } from "./resusables/Functions";
 import Loading from "./LoadingError/Loading";
-import Message from "./LoadingError/Error";
 import { serverUrl } from "./resusables/Functions";
+import ZimplsTable from "./resusables/ZimplsTable";
 
 const ZimpslByGameweek = (props) => {
   const { gameweek } = props;
@@ -42,11 +42,16 @@ const ZimpslByGameweek = (props) => {
     {loading ? (
             <Loading />
         ) : error ? (
-            <Message variant="alert-danger"></Message>
+            // <Message variant="alert-danger"></Message>
+            ""
         ) : (
-          <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
+          // <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
+          <div className="table-responsive col-lg-7 col-sm-10">
+            {data.length === 0 ? (
+              <h1>NO FIXTURES YET</h1>
+            ) : (
           <table className="fixture-board table mt-1" style={{ color: "#000", width: "100%" }}>
-            {data.map((d) => (
+            {data.length > 0 && data.map((d) => (
               <>
               <tr className="" style={{ backgroundColor: "#ebe9e4", borderRadius: "5px" }}>
                 <td colSpan={isLaptop ? 3 : 5 } className="p-2">
@@ -117,10 +122,11 @@ const ZimpslByGameweek = (props) => {
             </>
             ))}
           </table>
+            )}
         </div>
           )}
-    <div className={`${isLaptop ? `col-4` : `col-12`}`} style={{color: "#000"}}>
-      Table
+    <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}>
+      <ZimplsTable />
     </div>
     </div>
     </div>
