@@ -1,5 +1,6 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Toast = () => {
   return (
@@ -8,7 +9,7 @@ const Toast = () => {
         position="top-right"
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick
+        // closeOnClick
         rtl={false}
       />
       {/* Same as */}

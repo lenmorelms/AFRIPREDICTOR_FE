@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeamLeaderboad } from "../Redux/Actions";
 import Pagination from "./Pagination";
 import Loading from "./LoadingError/Loading";
 import Message from "./LoadingError/Error";
+import { isDeviceLaptop } from "./resusables/Functions";
 
 const TeamLeaderboard = (props) => {
+    const [isLaptop] = useState(isDeviceLaptop());
     const dispatch = useDispatch();
     const { team, pagenumber } = props;
 
@@ -30,18 +32,17 @@ const TeamLeaderboard = (props) => {
       <thead>
         <tr>
           <th>Position</th>
-          <th>Player</th>
-          <th>Predicted</th>
-          <th>Result</th>
-          <th>Close</th>
-          <th>Exact</th>
+          <th>{isLaptop ? "Player" : "P"}</th>
+          <th>{isLaptop ? "Result" : "R"}</th>
+          <th>{isLaptop ? "Close" : "C"}</th>
+          <th>{isLaptop ? "Exact" : "E"}</th>
           <th>Points</th>
         </tr>
       </thead>
       <tbody>
         {playerTeamLeaderboard && playerTeamLeaderboard.map((d) => (
-            <tr>
-                <td>#</td>
+            <tr key={d._id}>
+                <td>{d.position}</td>
                 <td>{d.username}</td>
                 <td>{d.predicted}</td>
                 <td>{d.result}</td>
@@ -52,6 +53,17 @@ const TeamLeaderboard = (props) => {
         ))}
       </tbody>
     </table>
+    {!isLaptop && (
+          <div>
+            <h3>KEY:</h3>
+            <ul>
+              <li>P: Played</li>
+              <li>R: Result</li>
+              <li>C: Close</li>
+              <li>E: Exact</li>
+            </ul>
+          </div>
+        ) }
         </div>
         </div>
         )}

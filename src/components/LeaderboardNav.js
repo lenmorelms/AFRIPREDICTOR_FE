@@ -14,7 +14,7 @@ const LeaderboardNav = () => {
         dispatch(profileDetails(userInfo._id));
     }, [dispatch, userInfo._id]);
     return (
-        <>
+        <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="navbar-collapse" id="navbarNav">
         <ul className="navbar-nav w-100 justify-content-between">
@@ -27,7 +27,7 @@ const LeaderboardNav = () => {
         </ul>
       </div>
     </nav>
-        </>
+        </div>
     );
 };
 

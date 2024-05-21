@@ -9,6 +9,15 @@ import Loading from "./LoadingError/Loading";
 // import Message from "./LoadingError/Error";
 import { serverUrl } from "./resusables/Functions";
 import ZimplsTable from "./resusables/ZimplsTable";
+import Toast from "./LoadingError/Toast";
+import { toast } from "react-toastify";
+
+const ToastObjects = {
+  pauseOnFocusLoss: false,
+  draggable: false,
+  pauseOnHover: false,
+  autoClose: 2000,
+};
 
 const Zimpsl = () => {
   const [isLaptop] = useState(isDeviceLaptop());
@@ -21,22 +30,28 @@ const Zimpsl = () => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const zimpslData = useSelector((state) => state._fetchZimpsl);
   const { data, loading, error } = zimpslData;
+  const zimpslPredictData = useSelector((state) => state._zimpslPredict);
+  const { data: predictData, error: predictError } = zimpslPredictData;
 
   const handlePrediction = (userId, fixtureId, gameweek, score1, score2) => {
     if(score1 === "" || score2 === "") {
-      alert("Enter Scoreline");
+      // alert("Enter Scoreline");
+      toast.warn("Enter scoreline", ToastObjects);
     } else {
       dispatch(zimpslPredict(userId, fixtureId, parseInt(gameweek), parseInt(score1), parseInt(score2)));
-      alert("Prediction Updated");
+      // alert("Prediction Updated");
     }
   };
   const diagonalInches = Math.sqrt(Math.pow(window.screen.width, 2) + Math.pow(window.screen.height, 2)) / 96;
 
   useEffect(() => {
     dispatch(fetchZimpsl(userInfo._id));
-  }, [dispatch, userInfo._id]);
+    if(predictData) toast.success("Prediction Updated", ToastObjects);
+    if(predictError) toast.error("Failed, try again", ToastObjects);
+  }, [dispatch, userInfo._id, predictData, predictError]);
   return (
     <>
+    <Toast />
     <div className="zimpsl bg-light" style={{ color: "#000" }}>
     <Gameweeks />
     {console.log(diagonalInches)}

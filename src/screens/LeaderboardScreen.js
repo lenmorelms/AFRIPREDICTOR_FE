@@ -13,7 +13,7 @@ const LeaderboardScreen = () => {
         <>
         <Header />
         <div className="homepage-hero">
-        <div className="my-component" style={{ margin: "0% 10%" }}>
+        <div className="my-component">
             {/* Head */}
             <ZimpslHeader />
             {/* Body */}

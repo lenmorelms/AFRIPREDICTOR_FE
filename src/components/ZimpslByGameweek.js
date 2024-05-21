@@ -8,6 +8,15 @@ import { formatDate, getCurrentDateTime, isDeviceLaptop } from "./resusables/Fun
 import Loading from "./LoadingError/Loading";
 import { serverUrl } from "./resusables/Functions";
 import ZimplsTable from "./resusables/ZimplsTable";
+import Toast from "./LoadingError/Toast";
+import { toast } from "react-toastify";
+
+const ToastObjects = {
+  pauseOnFocusLoss: false,
+  draggable: false,
+  pauseOnHover: false,
+  autoClose: 2000,
+};
 
 const ZimpslByGameweek = (props) => {
   const { gameweek } = props;
@@ -21,21 +30,27 @@ const ZimpslByGameweek = (props) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const zimpslGameweekData = useSelector((state) => state._fetchZimpslByGameweek);
   const { data, loading, error } = zimpslGameweekData;
+  const zimpslPredictData = useSelector((state) => state._zimpslPredict);
+  const { data: predictData, error: predictError } = zimpslPredictData;
 
   const handlePrediction = (userId, fixtureId, gameweek, score1, score2) => {
     if(score1 === "" || score2 === "") {
-      alert("Enter Scoreline");
+      // alert("Enter Scoreline");
+      toast.warn("Enter scoreline", ToastObjects);
     } else {
       dispatch(zimpslPredict(userId, fixtureId, parseInt(gameweek), parseInt(score1), parseInt(score2)));
-      alert("Prediction Updated");
+      // alert("Prediction Updated");
     }
   };
 
   useEffect(() => {
     dispatch(fetchZimpslByGameweek(gameweek, userInfo._id));
-  }, [dispatch, gameweek, userInfo._id]);
+    if(predictData) toast.success("Prediction Updated", ToastObjects);
+    if(predictError) toast.error("Failed, Try again", ToastObjects);
+  }, [dispatch, gameweek, userInfo._id, predictData, predictError]);
   return (
     <>
+    <Toast />
     <div className="zimpsl bg-light" style={{ color: "#000" }}>
     <Gameweeks />
     <div className="row zimpsl-fixtures">
@@ -45,8 +60,8 @@ const ZimpslByGameweek = (props) => {
             // <Message variant="alert-danger"></Message>
             ""
         ) : (
-          // <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
-          <div className="table-responsive col-lg-7 col-sm-10">
+          <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
+            {/* <div className="table-responsive col-lg-7 col-sm-10"> */}
             {data.length === 0 ? (
               <h1>NO FIXTURES YET</h1>
             ) : (
@@ -125,7 +140,8 @@ const ZimpslByGameweek = (props) => {
             )}
         </div>
           )}
-    <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}>
+      <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}>
+        {/* <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}> */}
       <ZimplsTable />
     </div>
     </div>
