@@ -11,7 +11,7 @@ const ZimpslPointsSummary = () => {
 
     useEffect(() => {
         dispatch(fetchPlayerPoints(userInfo._id));
-    }, [dispatch, userInfo]);
+    }, [dispatch, userInfo._id]);
     return (
         <>
         <div className="container">

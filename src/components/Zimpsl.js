@@ -47,8 +47,8 @@ const Zimpsl = () => {
             // <Message variant="alert-danger"></Message>
             ""
         ) : (
-      // <div className={`table-responsive ${isLaptop ? `col-7` : `col-12`}`}>
-      <div className="table-responsive col-lg-7 col-sm-10">
+      <div className={`table-responsive ${isLaptop ? `col-7` : `col-12`}`}>
+      {/* // <div className="table-responsive col-lg-7 col-sm-10"> */}
         {data.length === 0 ? (
           <h1>NO FIXTURES YET</h1>
         ) : (
@@ -128,8 +128,8 @@ const Zimpsl = () => {
         
       </div>
         )}
-    {/* <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}> */}
-      <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}>
+    <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}>
+      {/* <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}> */}
         <ZimplsTable />   
     </div>
     </div>

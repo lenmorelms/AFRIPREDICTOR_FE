@@ -54,7 +54,7 @@ const Header = () => {
                     {userInfo && 
                         <div className="dropdown-menu">
                             <Link to={`/profile/${userInfo._id}`} className="dropdown-item">Profile</Link>
-                            <Link className="dropdown-item" onClick={logoutHandler}>Logout</Link>
+                            <Link to="#!" className="dropdown-item" onClick={logoutHandler}>Logout</Link>
                         </div>
                     }
                     </div>
