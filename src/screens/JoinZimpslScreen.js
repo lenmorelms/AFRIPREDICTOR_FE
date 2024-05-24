@@ -9,6 +9,7 @@ import Button from "../components/resusables/Button";
 import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import { useNavigate } from "react-router-dom";
+import ReplaceSpacesWithUnderscores from "../components/resusables/ReplaceSpacesWithUnderscores";
 
 const JoinZimpslScreen = () => {
     const [tournament] = useState("Zimpsl");
@@ -53,7 +54,8 @@ const JoinZimpslScreen = () => {
                                         className="btn "
                                         type="button"
                                         children={<label className="label-item">
-                                                    <Team logoUrl={team.image} name={team.name}/>
+                                                    <Team logoUrl={`/${ReplaceSpacesWithUnderscores(team.name)}.jpg`} name={team.name}/>
+                                                    {ReplaceSpacesWithUnderscores}
                                                     </label>
                                                 }
                                         onClick={() => dispatch(joinTournament(userInfo._id, userInfo.username, tournament, team.name))}

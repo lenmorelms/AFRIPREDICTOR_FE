@@ -6,16 +6,16 @@ import Image from "./resusables/Image";
 import Gameweeks from "./Gameweeks";
 import { formatDate, getCurrentDateTime, isDeviceLaptop } from "./resusables/Functions";
 import Loading from "./LoadingError/Loading";
-import { serverUrl } from "./resusables/Functions";
 import ZimplsTable from "./resusables/ZimplsTable";
 import Toast from "./LoadingError/Toast";
 import { toast } from "react-toastify";
+import ReplaceSpacesWithUnderscores from "./resusables/ReplaceSpacesWithUnderscores";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
   pauseOnHover: false,
-  autoClose: 2000,
+  autoClose: 1000,
 };
 
 const ZimpslByGameweek = (props) => {
@@ -31,7 +31,7 @@ const ZimpslByGameweek = (props) => {
   const zimpslGameweekData = useSelector((state) => state._fetchZimpslByGameweek);
   const { data, loading, error } = zimpslGameweekData;
   const zimpslPredictData = useSelector((state) => state._zimpslPredict);
-  const { data: predictData, error: predictError } = zimpslPredictData;
+  const { error: predictError } = zimpslPredictData;
 
   const handlePrediction = (userId, fixtureId, gameweek, score1, score2) => {
     if(score1 === "" || score2 === "") {
@@ -40,14 +40,15 @@ const ZimpslByGameweek = (props) => {
     } else {
       dispatch(zimpslPredict(userId, fixtureId, parseInt(gameweek), parseInt(score1), parseInt(score2)));
       // alert("Prediction Updated");
+      toast.success("Prediction Updated", ToastObjects);
     }
   };
 
   useEffect(() => {
     dispatch(fetchZimpslByGameweek(gameweek, userInfo._id));
-    if(predictData) toast.success("Prediction Updated", ToastObjects);
+    // if(predictData) toast.success("Prediction Updated", ToastObjects);
     if(predictError) toast.error("Failed, Try again", ToastObjects);
-  }, [dispatch, gameweek, userInfo._id, predictData, predictError]);
+  }, [dispatch, gameweek, userInfo._id, predictError]);
   return (
     <>
     <Toast />
@@ -60,7 +61,7 @@ const ZimpslByGameweek = (props) => {
             // <Message variant="alert-danger"></Message>
             ""
         ) : (
-          <div className={`table-responsive ${isLaptop ? `col-8` : `col-12`}`}>
+          <div className={`table-responsive ${isLaptop ? `col-7` : `col-12`}`}>
             {/* <div className="table-responsive col-lg-7 col-sm-10"> */}
             {data.length === 0 ? (
               <h1>NO FIXTURES YET</h1>
@@ -89,7 +90,7 @@ const ZimpslByGameweek = (props) => {
             <tr>
               <td><input id={`fixtureId_${d.fixtureCount}`} value={d._id} hidden /></td>
               <td><input id={`gameweek_${d.fixtureCount}`} value={d.gameweek} hidden /></td>
-              <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team1}.jpg`}/><br />{d.team1}</td>
+              <td><Image className="predictor-logo" src={`/${ReplaceSpacesWithUnderscores(d.team1)}.jpg`}/><br />{d.team1}</td>
               
               <td>
               {d.result ?
@@ -127,7 +128,7 @@ const ZimpslByGameweek = (props) => {
                   )
                 }
               </td>            
-              <td><Image className="predictor-logo" src={`${serverUrl}/images/zimpsl/${d.team2}.jpg`}/><br />{d.team2}</td>
+              <td><Image className="predictor-logo" src={`/${ReplaceSpacesWithUnderscores(d.team2)}.jpg`}/><br />{d.team2}</td>
               <td className="lock-btn" style={{ display: (!isLaptop || d.result) ? "none" : "block" }}>
                 <Button className="btn btn-primary" type="submit" children="Lock" disabled={(d.playerPredicted && true) || (d.result && true) || (d.date <= getCurrentDateTime().date)}
                     onClick={() => handlePrediction(userInfo._id, docValue(`fixtureId_${d.fixtureCount}`), docValue(`gameweek_${d.fixtureCount}`), docValue(`playerScore1_${d.fixtureCount}`), docValue(`playerScore2_${d.fixtureCount}`))} 
@@ -141,7 +142,6 @@ const ZimpslByGameweek = (props) => {
         </div>
           )}
       <div className={`table-responsive ${isLaptop ? `col-5` : `col-12`}`} style={{color: "#000"}}>
-        {/* <div className="table-responsive col-lg-5 col-sm-10" style={{color: "#000"}}> */}
       <ZimplsTable />
     </div>
     </div>

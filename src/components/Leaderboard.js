@@ -32,7 +32,7 @@ const Leaderboard = (props) => {
         <tr>
           <th>#</th>
           <th>Player</th>
-          <th>{isLaptop ? "Player" : "P"}</th>
+          <th>{isLaptop ? "Played" : "P"}</th>
           <th>{isLaptop ? "Result" : "R"}</th>
           <th>{isLaptop ? "Close" : "C"}</th>
           <th>{isLaptop ? "Exact" : "E"}</th>

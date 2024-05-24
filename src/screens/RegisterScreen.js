@@ -57,6 +57,10 @@ const RegisterScreen = () => {
             alert("Passwords dont match");
         } else if(!document.getElementById("terms").checked) {
             alert("Accept terms");
+        }else if(password.length < 6) {
+            alert("Password should be 6 characters or more");
+        }else if(age < 18) {
+            alert("You must be 18 or more years old to register on AfriPredictor");
         } else {
             dispatch(register(email, username, age, gender.label, country.label, password, isAdmin));
         }
@@ -66,14 +70,15 @@ const RegisterScreen = () => {
         dispatch(resendCode(data._id));
     }
     useEffect(() => {
-        if(data.verificationToken) setShowSendCode(true)
+        localStorage.removeItem("userInfo");
+        if(data && data.verificationToken) setShowSendCode(true)
     }, [data])
 
     return (
         <>
         <Header />
         <div className="" style={{ textAlign: "center" }}>
-        {error && <Message variant="alert-danger">{error}</Message>}
+        {error && <Message variant="alert-danger">Email/Username taken</Message>}
         {success ? <div>Account verification link sent to email</div> : codeSuccess ? <div>Account verification link sent to email</div> : ""}
         {loading && <Loading />}
         {codeError && <Message variant="alert danger">Failed to Resend Code, Try Again.</Message>}
@@ -161,6 +166,7 @@ const RegisterScreen = () => {
                 </form>
             </div>
             <div className="flex m-3">
+            <p>Already have an account <Link to="/login" className="p-2" style={{ textDecoration: "none" }}>Login</Link> </p>
             {showSendCode && <button className="plain-button" onClick={submitResendHandler}><Link to="/" className="nav-item p-2" style={{ textDecoration: "none" }}>Resend Verification Code</Link></button>}
             </div>
         </div>

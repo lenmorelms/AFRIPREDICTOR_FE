@@ -10,8 +10,7 @@ const Header = () => {
     const location = useLocation();
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    // const path = location.pathname.split("/")[location.pathname.split("/").length - 1];
-
+    // const path = location.pathname.split("/")[location.pathname.split("/").length - 1];         
     useEffect(() => {
         const path = location.pathname.substring(0, 5);
         if(!userInfo && path !== "/regi" && path !== "/forg" && path !== "/rese"
