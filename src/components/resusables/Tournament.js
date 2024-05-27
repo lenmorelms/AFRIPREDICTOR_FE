@@ -3,7 +3,7 @@ import Image from './Image';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
-const Tournament = ({ logoUrl, heading, text, url, buttonText }) => {
+const Tournament = ({ logoUrl, heading, text, url, submitHandler, buttonText }) => {
   return (
     <div className="">
       <div className="row">
@@ -32,6 +32,7 @@ const Tournament = ({ logoUrl, heading, text, url, buttonText }) => {
                 <Button
                   className="btn btn-login margin"
                   type="submit"
+                  onClick={submitHandler}
                   children={buttonText} 
                 />
             </Link>

@@ -23,6 +23,8 @@ import PrivacyScreen from './screens/PrivacyScreen';
 import HowITWorksScreen from './screens/HowITWorksScreen';
 import ContactScreen from './screens/ContactScreen';
 import LearnScreen from './screens/LearnScreen';
+import UclfinalScreen from './screens/UclfinalScreen';
+import UclfinalLeaderboardScreen from './screens/UclfinalLeaderboardScreen';
 
 function App() {
   return (
@@ -53,6 +55,12 @@ function App() {
         } />
         <Route exact path='/zimpsl' element={
         <PrivateRouter> <ZimpslScreen /> </PrivateRouter>
+        } />
+        <Route exact path='/uclfinal' element={
+        <PrivateRouter> <UclfinalScreen /> </PrivateRouter>
+        } />
+        <Route exact path='/uclfinal/leaderboard' element={
+        <PrivateRouter> <UclfinalLeaderboardScreen /> </PrivateRouter>
         } />
         <Route exact path='/zimpsl/:gameweek' element={
         <PrivateRouter> <ZimpslGameweekScreen /> </PrivateRouter>

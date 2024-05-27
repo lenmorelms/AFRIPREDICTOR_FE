@@ -42,7 +42,6 @@ const Zimpsl = () => {
       toast.success("Prediction Updated", ToastObjects);
     }
   };
-  const diagonalInches = Math.sqrt(Math.pow(window.screen.width, 2) + Math.pow(window.screen.height, 2)) / 96;
 
   useEffect(() => {
     dispatch(fetchZimpsl(userInfo._id));
@@ -54,7 +53,6 @@ const Zimpsl = () => {
     <Toast />
     <div className="zimpsl bg-light" style={{ color: "#000" }}>
     <Gameweeks />
-    {console.log(diagonalInches)}
     <div className="row zimpsl-fixtures">
     {loading ? (
             <Loading />
