@@ -11,7 +11,7 @@ const VerifyScreen = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const redirect = location.search ? location.search.split("=")[1] : "/";
+    const redirect = location.search ? location.search.split("=")[1] : "/tournaments";
 
     const verifyData = useSelector((state) => state._verify);
     const { data, loading, error } = verifyData;
@@ -28,8 +28,8 @@ const VerifyScreen = () => {
     }, [data, navigate, redirect]);
 
     return (
-        <div>
-            <div style={{ textAlign: "center" }}>
+        <div className="container">
+            <div className="row" style={{ textAlign: "center" }}>
             <h2 className="center">Account Verification</h2><br />
             {error && <Message variant="alert-danger">Failed to Verify Account, Try Again.</Message>}
             {loading && <Loading />}

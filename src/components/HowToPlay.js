@@ -51,7 +51,7 @@ const HowToPlay = () => {
         </div>
       </div>
         <div className="start-playing p-3" style={{ textAlign: "center" }}>
-            <Link to="/login">
+            <Link to="/tournaments">
               <button variant="light" className="Button rounded-pill">Start Playing <i className="fa fa-arrow-right" aria-hidden="true"></i></button>
             </Link>
         </div>
